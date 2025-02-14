@@ -1,10 +1,17 @@
 import React from "react";
 import "./Navbar.css";
 
-export default function Navbar() {
+const Navbar = ({ onLogin }) => {
   return (
     <nav className="navbar">
       <h1>The Brand Collector</h1>
+      <div className="nav-buttons">
+        <button className="nav-button" onClick={onLogin}>
+          Login with Google
+        </button>
+      </div>
     </nav>
   );
-}
+};
+
+export default Navbar;

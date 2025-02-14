@@ -9,10 +9,35 @@
   z-index: 1000;
 }
 
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+}
+
 .navbar h1 {
-  text-align: center;
   margin: 0;
-  font-family: monospace;
   font-size: 1.5rem;
-  color: #e9e4e4;
+  color: #d6d5d5;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-button {
+  padding: 0.4rem 0.2rem;
+  margin-right: 50px;
+  border: none;
+  border-radius: 5px;
+  background-color: #92969a;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.nav-button:hover {
+  background-color: #0056b3;
 }
