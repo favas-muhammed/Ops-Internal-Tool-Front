@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
 import EmailList from "./EmailList";
+import CompanyIcon from "./CompanyIcon";
 
 const Home = () => {
   const [token, setToken] = useState(null);
@@ -29,8 +30,9 @@ const Home = () => {
   return (
     <div style={{ paddingTop: "70px" }}>
       <Navbar onLogin={handleLogin} />
+      <CompanyIcon />
       <div className="container">
-        <h1>Welcome to the Internal Tool</h1>
+        <h1></h1>
         {token && <EmailList token={token} />}
       </div>
     </div>
