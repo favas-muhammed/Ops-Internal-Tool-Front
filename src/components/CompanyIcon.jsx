@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./CompanyIcon.css";
 
 const CompanyIcon = () => {
   const [showSubIcons, setShowSubIcons] = useState(false);
