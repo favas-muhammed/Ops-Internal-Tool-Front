@@ -1,7 +1,8 @@
 .company-icon-container {
   display: flex;
-  flex-direction: none;
+  flex-direction: column;
   align-items: center;
+
   margin-top: -270px;
   margin-left: 700px;
 }
