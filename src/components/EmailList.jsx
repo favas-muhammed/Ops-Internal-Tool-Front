@@ -1,20 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const EmailList = ({ token }) => {
+const EmailList = () => {
   const [emails, setEmails] = useState([]);
   const [loading, setLoading] = useState(true);
+  const userEmail = localStorage.getItem("email");
 
   useEffect(() => {
     const fetchEmails = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/gmail/emails",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
+          `http://localhost:5000/api/gmail/emails?userEmail=${userEmail}`
         );
         setEmails(response.data);
       } catch (error) {
@@ -24,10 +20,8 @@ const EmailList = ({ token }) => {
       }
     };
 
-    if (token) {
-      fetchEmails();
-    }
-  }, [token]);
+    fetchEmails();
+  }, [userEmail]);
 
   if (loading) {
     return <div>Loading emails...</div>;
@@ -35,20 +29,29 @@ const EmailList = ({ token }) => {
 
   return (
     <div className="email-list">
-      <h2>Your Emails</h2>
-      {emails.length > 0 ? (
-        <ul>
+      <h2>Inbox Emails</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>From</th>
+            <th>Subject</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
           {emails.map((email) => (
-            <li key={email.id}>
-              <div className="email-item">
-                <h3>{email.snippet}</h3>
-              </div>
-            </li>
+            <tr key={email.id}>
+              <td>
+                {email.payload.headers.find((h) => h.name === "From").value}
+              </td>
+              <td>{email.snippet}</td>
+              <td>
+                {new Date(parseInt(email.internalDate)).toLocaleDateString()}
+              </td>
+            </tr>
           ))}
-        </ul>
-      ) : (
-        <p>No emails found</p>
-      )}
+        </tbody>
+      </table>
     </div>
   );
 };
